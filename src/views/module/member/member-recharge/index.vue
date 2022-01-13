@@ -20,13 +20,16 @@
     </div> -->
     <cm-search-user class="member-recharge__search" :currentMember="currentMember" @selectMember="selectMember"/>
     <cm-form
+      ref="formR"
       :model="form"
       class="member-recharge__form"
       label-width="100px"
       label-suffix=":">
       <cm-form-title title="充值"/>
       <cm-form-item
-        label="充值会员">
+        prop="memberId"
+        label="充值会员"
+        :rules="validator.required().generate()">
         <span v-if="currentMember.data">
           {{currentMember.data.name || currentMember.data.phone}}
           <i class="el-icon-error color-error" @click="cancelMember"></i>
@@ -58,7 +61,7 @@
 </template>
 
 <script>
-import { inject, reactive, ref, watch } from 'vue';
+import { getCurrentInstance, inject, reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import validatorMixins from '@/mixins/validator.mixins.js';
 // import addMember from '../components/add-member.vue';
@@ -99,8 +102,16 @@ export default {
       rechargeGold: '',
       memberId: ''
     });
+    const instance = getCurrentInstance();
+    const formR = ref(null);
     const handleConfirm = () => {
-      showFGD.value = true;
+      console.log('test-instance', instance);
+      formR.value.validate((err)=> {
+        if (!err) {
+          return;
+        }
+        showFGD.value = true;
+      });
     };
     const router = useRouter();
     const openPage = () => {
@@ -112,11 +123,13 @@ export default {
       form.memberId = null;
       form.rechargeGold = null;
     };
+
     return {
       iptText,
       searchList,
       currentMember,
       form,
+      formR,
       selectMember,
       handleConfirm,
       showFGD,

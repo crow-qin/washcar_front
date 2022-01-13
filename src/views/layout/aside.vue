@@ -8,33 +8,42 @@
       :unique-opened="true"
       :default-active="defaultActive"
     >
-      <el-submenu v-for="v in asideList" :index="v.flag" :key="v.flag">
-        <template v-slot:title>
-          <i :class="v.icon"></i>
-          <span>{{ v.name }}</span>
-        </template>
-        <el-menu-item-group v-if="v.children.length > 0">
-          <el-menu-item
-            v-for="v1 in v.children"
-            :index="v1.flag"
-            :key="v1.flag"
-            @click="openPage(v1)"
-            >{{ v1.name }}</el-menu-item
-          >
-        </el-menu-item-group>
-      </el-submenu>
+      <template v-for="v in asideList" :key="v.name">
+        <el-submenu :index="v.name" v-if="v.children && v.children.length> 0 && v.redirect == undefined ">
+          <template v-slot:title>
+            <i :class="v.meta.icon"></i>
+            <span>{{ v.meta.title }}</span>
+          </template>
+          <el-menu-item-group v-if="v.children && v.children.length > 0">
+            <el-menu-item
+              v-for="v1 in v.children"
+              :index="v1.name"
+              :key="v1.name"
+              @click="openPage(v1)"
+              >{{ v1.meta.title }}</el-menu-item
+            >
+          </el-menu-item-group>
+        </el-submenu>
+        <el-menu-item v-else :index="v.name" @click="openPage(v)">
+          <i :class="v.meta.icon"></i>
+          <span>{{ v.meta.title }}</span>
+        </el-menu-item>
+      </template>
+      
     </el-menu>
   </div>
 </template>
 
 <script>
-import { onMounted, ref, watch } from "vue";
-import RouterEnums from "@/enums/router.enums.js";
+import { onMounted, ref, watchEffect } from "vue";
+// import RouterEnums from "@/enums/router.enums.js";
 import { useRouter } from "vue-router";
+import asideList from '@/router/routes';
 
 export default {
   setup() {
     const router = useRouter();
+    // const route =
     const isCollapse = ref(false);
     const defaultActive = ref("");
     const handleOpen = (key, keyPath) => {
@@ -43,69 +52,33 @@ export default {
     const handleClose = (key, keyPath) => {
       console.log(key, keyPath);
     };
-    const asideList = ref([
-      {
-        icon: "el-icon-user-solid",
-        name: "会员",
-        flag: "member",
-        children: [
-          {
-            name: "充值",
-            flag: RouterEnums.MEMBER_RECHARGE,
-          },
-          {
-            name: "消费",
-            flag: RouterEnums.MEMBER_CONSUMPTION,
-          },
-          {
-            name: "编辑",
-            flag: RouterEnums.MEMBER_EDIT,
-          },
-        ],
-      },
-      {
-        icon: "el-icon-s-marketing",
-        name: "统计记录",
-        flag: "statistics",
-        children: [
-          {
-            name: "金额记录",
-            flag: RouterEnums.STATISTICS_GOLD,
-          },
-          {
-            name: "个人记录",
-            flag: RouterEnums.STATISTICS_USER,
-          },
-        ],
-      },
-    ]);
+
     onMounted(() => {
-      const data = router.currentRoute.value;
-      asideList.value.map((v) => {
-        v.children.map((v1) => {
-          if (v1.flag === data.name) {
-            defaultActive.value = data.name;
-          }
-        });
-      });
     });
-    watch(
-      () => router.currentRoute.value,
-      (n) => {
-        asideList.value.map((v) => {
-          v.children.map((v1) => {
-            if (v1.flag === n.name) {
-              defaultActive.value = n.name;
-            }
-          });
+    watchEffect(
+      () => {
+        const curVal = router.currentRoute.value;
+        asideList.map((v) => {
+          if (v.children) {
+            v.children.map((v1) => {
+              if (v1.name === curVal.name) {
+                defaultActive.value = curVal.name;
+              }
+            });
+            return;
+          } else if (v.name === curVal.name) {
+            defaultActive.value = curVal.name;
+          }
         });
       }
     );
     const openPage = (item) => {
       console.log("test-item", item);
-      router.push({ name: item.flag });
+      router.push({ name: item.name });
     };
+    console.log('test-router', asideList);
     return {
+
       isCollapse,
       defaultActive,
       handleOpen,
