@@ -76,6 +76,11 @@ export default {
             name: "个人记录",
             flag: RouterEnums.STATISTICS_USER,
           },
+          {
+            name: "个人记录1",
+            flag: RouterEnums.TOOL_VIDEO,
+          },
+          
         ],
       },
     ]);

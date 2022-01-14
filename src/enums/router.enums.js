@@ -10,9 +10,10 @@ const RouterEnums = {
 
   // 统计
   // 金额统计
-  STATISTICS_GOLD: 'statistcsGold',
+  STATISTICS_GOLD: 'statisticsGold',
   // 个人统计
   STATISTICS_USER: 'statisticsUser',
+  TOOL_VIDEO: 'toolVideo',
 };
 
 export default RouterEnums;

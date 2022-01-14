@@ -19,7 +19,7 @@
 
 <script>
 import { useRouter } from 'vue-router';
-import RouterEnums from '@/enums/router.enums';
+import RouterEnums from '@/enums/router.enums.js';
 import { clearCookies } from '@/utils/auth.util';
 import { computed } from 'vue';
 import { useStore } from 'vuex';

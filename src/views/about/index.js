@@ -1,7 +1,7 @@
 import { ref, watch, computed,getCurrentInstance, onMounted, reactive, provide, readonly, onUpdated, onBeforeUpdate } from "vue";
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import RouterEnums from "../../enums/router.enums";
+import RouterEnums from "../../enums/router.enums.js";
 
 export default () => {
   const { ctx } = getCurrentInstance();

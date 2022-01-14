@@ -35,5 +35,17 @@ export default [
         component: () => import('@/views/module/statistic/gold/index.vue'),
       }
     ]
+  },
+  {
+    name: 'tool',
+    path: '/tool',
+    component: Main,
+    children: [
+      {
+        name: RouterEnums.TOOL_VIDEO,
+        path: 'video',
+        component: () => import('@/views/module/tool/video/index.vue')
+      }
+    ]
   }
 ];

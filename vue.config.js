@@ -49,6 +49,11 @@ module.exports =  {
       // 开发环境使用
       config.devtool = 'eval-source-map';
     }
+    // Object.assign(config, {
+    //   resolve: {
+    //     extensions: ['.ts', '.vue', '.js']
+    //   }
+    // })
   },
   chainWebpack: config => {
     // loader：是webpack用来预处理模块的，在一个模块被引入之前，会预先使用loader处理模块的内容，在你打包的时候对某些内容需要loader来处理一下，比如css模块；默认webpack只会处理js代码，所以当我们想要去打包其他内容时，就需要相应的loader去处理某些内容
@@ -76,7 +81,6 @@ module.exports =  {
 
     config.resolve.alias
       .set("@", path.join(__dirname, 'src'));
-
     const oneOfsMap = config.module.rule('scss').oneOfs.store;
     oneOfsMap.forEach(item => {
       item
