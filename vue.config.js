@@ -121,7 +121,7 @@ module.exports =  {
     // });
 
     config.resolve.alias
-      .set("@", path.join(__dirname, 'src'));
+      .set("@", path.join(__dirname, './src'));
     const oneOfsMap = config.module.rule('scss').oneOfs.store;
     oneOfsMap.forEach(item => {
       item

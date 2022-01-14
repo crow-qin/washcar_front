@@ -8,7 +8,7 @@ export default [
     component: Main,
     meta: {
       title: '会员',
-      icon: "el-icon-user-solid",
+      icon: 'el-icon-user-solid',
     },
     children: [
       {
@@ -39,7 +39,7 @@ export default [
     path: '/statistic',
     meta: {
       title: '统计记录',
-      icon: "el-icon-s-marketing",
+      icon: 'el-icon-s-marketing',
     },
     component: Main,
     children: [
@@ -80,7 +80,7 @@ export default [
     path: '/components',
     meta: {
       title: '组件',
-      icon: 'el-icon-s-help'
+      icon: 'el-icon-suitcase'
     },
     component: Main,
     children: [
@@ -98,7 +98,7 @@ export default [
         meta: {
           title: '调用摄像头',
         },
-        component: () => import('@/views/module/tool/video/index.vue')
+        component: () => import('@/views/module/component-model/video/index.vue')
       }
     ]
   }

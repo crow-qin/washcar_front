@@ -20,103 +20,46 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
-=2021=
-==d7--0207==
-提供，注入
-provide, inject
-适用深度嵌套的组件
-父组件使用provider提供数据
-子组件使用inject使用数据
-
-provide inject需要写在setup中
-
-提供非组件内的数据(一般是静态字符串或数字)，
-父组件
-import { provide } from 'vue';
-export default {
-  setup() {
-    provide('number', 1);
-  }
-}
-
-子组件
-import { inject } from 'vue';
-export default {
-  setup() {
-    const number = inject('number');
-    return {
-      number
-    }
-  }
-}
-
-提供组件内响应式的数据
-父组件
-import { provide, ref } from 'vue';
-export default {
-  setup() {
-    const number = ref(1);
-    provide('number', number);
-    return {
-      number,
-    };
-  }
-}
-
-子组件
-import { inject } from 'vue';
-export default {
-  setup() {
-    const number = inject('number');
-    return {
-      number,
-    };
-  }
-}
-
-provide还可以提供方法 子组件通过inject使用该方法
-
-单元测试库 Jest Mocha
-端到端测试 Cypress.io
+# 2021年2月7日开始
 
 
+```js
 const account = new mongoose.Schema({
-  <!-- 姓名 -->
+  // <!-- 姓名 -->
   name: {
     type: String,
   },
-  <!-- 手机号 -->
+  // <!-- 手机号 -->
   phone: {
     type: String,
   },
-  <!-- 充值金额 -->
+  // <!-- 充值金额 -->
   recharge: {
     type: Number,
   },
-  <!-- 消费金额 -->
-  comsumption: {
+  // <!-- 消费金额 -->
+  consumption: {
     type: Number,
   },
-  <!-- 注册时间 -->
+  // <!-- 注册时间 -->
   time: {
     type: String，
     default: new Date().getTime(),
   },
-  <!-- 性别 -->
+  // <!-- 性别 -->
   gender: {
-    type: Boolean,
-    <!-- 0: 女，1: 男 -->
+    type: Number,
+    // <!-- 1: 女，2: 男 -->
   },
   拥有车辆
   carList: {
     type: Array
   }
 })
+// 车辆表
 const car = new mongoose.Schema({
-  <!-- 车牌 -->
+  // <!-- 车牌 -->
   licensePlate: {
     type: String,
   },
@@ -133,7 +76,7 @@ const car = new mongoose.Schema({
 const recharge = new mongoose.Schema({
   time: {
     type: String,
-    defalut: new Date().getTime(),
+    default: new Date().getTime(),
   },
   gold: {
     type: Number,
@@ -145,7 +88,7 @@ const recharge = new mongoose.Schema({
 const consumption =  new mongoose.Schema({
   time: {
     type: String,
-    defalut: new Date().getTime(),
+    default: new Date().getTime(),
   },
   gold: {
     type: Number,
@@ -160,7 +103,7 @@ const consumption =  new mongoose.Schema({
     type: String,
   },
 })
-<!-- 服务类型 -->
+// <!-- 服务类型 -->
 const serviceType = new mongoose.Schema({
   name: {
     type: String,
@@ -172,7 +115,7 @@ const serviceType = new mongoose.Schema({
     type: double,
   },
 })
-<!-- 车辆类型 轿车 越野 suv -->
+// <!-- 车辆类型 轿车 越野 suv -->
 const carSize = new mongoose.Schema({
   carSizeType: {
     type: String,
@@ -193,5 +136,6 @@ const servicesType = ref('服务类型: 名称，枚举值');
 // 30分钟 1小时 30分钟
 // 使用provide、inject代替vuex，vue3+ts， axios
 // 后端使用koa2+MongoDB
+```
 金额 按消费，充值 双折线图
 按天数

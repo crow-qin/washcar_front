@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import CmMain from "@/views/layout/main.vue";
 import moduleRoutes from "./routes";
 import RouterEnums from "../enums/router.enums.js";
-import { getToken } from "@/utils/auth.util";
+import { getToken } from "@/utils/auth.util.js";
 import { useStore } from "vuex";
 
 const routes = [

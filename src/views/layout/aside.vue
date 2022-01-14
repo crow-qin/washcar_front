@@ -43,7 +43,6 @@ import asideList from '@/router/routes';
 export default {
   setup() {
     const router = useRouter();
-    // const route =
     const isCollapse = ref(false);
     const defaultActive = ref("");
     const handleOpen = (key, keyPath) => {
