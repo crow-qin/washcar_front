@@ -80,9 +80,11 @@ export default {
     max-height: 168px;
     overflow: auto;
     .search-user__result__item {
-      display: block;
+      width: 280px;
+      margin-bottom: 10px;
+      margin-left: 0px;
     }
-    .search-user__result__item .el-link--inner {
+    .search-user__result__item span {
       display: flex;
       justify-content: space-between;
       align-items: center;

@@ -1,11 +1,18 @@
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// gzip代压缩
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+// 压缩代码
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin')
+
 // function resolve(dir) {
 //   return path.resolve(__dirname, dir);
 // }
 module.exports =  {
   productionSourceMap: true,
   publicPath: './',
+  outputDir: 'dist',
+  assetsDir: './assets',
   devServer: {
     open: false,
     overlay: {
@@ -24,6 +31,7 @@ module.exports =  {
     },
   },
   configureWebpack: config => {
+    // 向所有 api后缀的文件引入其他文件
     config.module.rules.push({
       test: /\.api\.js$/,
       include: path.resolve('./src/apis'),
@@ -49,11 +57,44 @@ module.exports =  {
       // 开发环境使用
       config.devtool = 'eval-source-map';
     }
-    // Object.assign(config, {
-    //   resolve: {
-    //     extensions: ['.ts', '.vue', '.js']
-    //   }
-    // })
+
+    config
+      .plugins.push(
+        new CompressionWebpackPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: /\.css|\.html|\.js/,
+          // 大于该数值才需要被压缩
+          threshold: 10240,
+          // 小于该值的资源才会被处理
+          minRatio: 0.8,
+          // 删除源文件
+          deleteOriginalAssets: false
+        })
+      )
+  },
+  configureWebpack: {
+    optimization: {
+      minimizer: [
+        new UglifyWebpackPlugin({
+          uglifyOptions: {
+            output: {
+              // 删除注释
+              commet: false
+            },
+            compress: {
+              // 删除debugger语句
+              drop_debugger: true,
+              // 删除 console 语句
+              drop_console: true,
+              pure_funcs: ['console.log']
+            }
+          },
+          sourceMap: false,
+          parallel: true,
+        }),
+      ]
+    }
   },
   chainWebpack: config => {
     // loader：是webpack用来预处理模块的，在一个模块被引入之前，会预先使用loader处理模块的内容，在你打包的时候对某些内容需要loader来处理一下，比如css模块；默认webpack只会处理js代码，所以当我们想要去打包其他内容时，就需要相应的loader去处理某些内容
