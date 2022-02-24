@@ -1,0 +1,1 @@
+export { default as getFriendList } from './get-friend'

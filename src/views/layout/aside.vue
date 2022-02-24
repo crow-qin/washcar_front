@@ -9,9 +9,12 @@
       :default-active="defaultActive"
     >
       <template v-for="v in asideList" :key="v.name">
-        <el-submenu :index="v.name" v-if="v.children && v.children.length> 0 && v.redirect == undefined ">
+        <el-sub-menu :index="v.name" v-if="v.children && v.children.length> 0 && v.redirect == undefined ">
           <template v-slot:title>
-            <i :class="v.meta.icon"></i>
+            <!-- <i :class="v.meta.icon"></i> -->
+            <el-icon>
+              <component :is="v.meta.icon"/>
+            </el-icon>
             <span>{{ v.meta.title }}</span>
           </template>
           <el-menu-item-group v-if="v.children && v.children.length > 0">
@@ -23,9 +26,12 @@
               >{{ v1.meta.title }}</el-menu-item
             >
           </el-menu-item-group>
-        </el-submenu>
+        </el-sub-menu>
         <el-menu-item v-else :index="v.name" @click="openPage(v)">
-          <i :class="v.meta.icon"></i>
+          <!-- <i :class="v.meta.icon"></i> -->
+          <el-icon>
+            <component :is="v.meta.icon"/>
+          </el-icon>
           <span>{{ v.meta.title }}</span>
         </el-menu-item>
       </template>

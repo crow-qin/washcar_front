@@ -5,7 +5,11 @@
     </div>
     <el-dropdown class="header-user">
       <span class="el-dropdown-link">
-        {{ user.nickname || user.account }}<i class="el-icon-arrow-down el-icon--right"></i>
+        {{ user.nickname || user.account }}
+        <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
+        <el-icon class="el-icon--right">
+          <arrow-down/>
+          </el-icon>
       </span>
       <template v-slot:dropdown>
         <el-dropdown-menu>

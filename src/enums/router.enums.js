@@ -22,7 +22,13 @@ const RouterEnums = {
 
   // 组件
   COMPONENTS: 'components',
-  LONG_LIST: 'longList'
+  LONG_LIST: 'longList',
+  
+  // 设置
+  SETTING: 'setting',
+  SETTING_ADD_USER: 'settingAddUser',
+
+  CHAT_CON: 'chatCon',
 };
 
 export default RouterEnums;

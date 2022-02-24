@@ -1,3 +1,12 @@
-const requireAll = requireContext => requireContext.keys().map(requireContext);
+const requireAll = (requireContext, fn) => requireContext.keys().map(fn);
 const req = require.context('./', true, /plugin\.js$/);
-requireAll(req);
+
+export default (app) => {
+  requireAll(req, v => {
+    if (typeof v == 'Function') {
+      return v(app);
+    } else {
+      return v;
+    }
+  });
+};

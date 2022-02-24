@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { getToken } from '@/utils/auth.util.js';
+import { ElMessage } from 'element-plus';
+
+axios.defaults.timeout = 15000;
 
 axios.interceptors.request.use(
   config => {
@@ -9,6 +12,20 @@ axios.interceptors.request.use(
   },
   err => {
     return Promise.reject(err);
+  }
+);
+axios.interceptors.response.use(
+  config => config,
+  error => {
+    // 请求超时响应
+    if (error.message.includes('timeout')) {
+      ElMessage({
+        message: '请求超时，请重试',
+        type: 'error',
+        center: true,
+      });
+      return;
+    }
   }
 );
 class Http {

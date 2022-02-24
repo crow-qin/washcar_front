@@ -12,17 +12,19 @@
         placeholder="请输入密码"
         prefix-icon="el-icon-user"
         v-model="user.password"/>
-      <el-button class="login-page__box__btn" type="primary" @click="getUser">登录</el-button>
+      <el-button type="text" @click="changeType">{{loginType ? '注册账号':'已有账号'}}</el-button>
+      <el-button class="login-page__box__btn" type="primary" @click="handleClick">{{loginType ? '登录':'注册'}}</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 // import { mapMutations } from 'vuex';
 import { useStore } from 'vuex';
 import { ElMessage } from 'element-plus';
 import { useRouter } from 'vue-router';
+import { register } from '@/business/login';
 
 export default {
   name: 'login',
@@ -34,19 +36,34 @@ export default {
       password: '',
     });
     
-    const getUser = async() => {
-      console.log('test-user', user);
-      if (user.account === 'admin' && user.password === '123') {
-        console.log('test-1');
-        store.commit('setUser', user);
-        store.commit('setToken', 1);
-        router.replace({name: 'Home'});
-        return;
-      }
+
+    const loginType = ref(true);
+    const changeType = () => {
+      loginType.value = !loginType.value;
+      user.account = '';
+      user.password = '';
+    };
+    const handleRegister = async(data) => {
+      const res = await register(data);
+      console.log('test-res', res);
+    };
+    
+    const handleClick = async() => {
+      // if (user.account === 'admin' && user.password === '123') {
+      //   store.commit('setUser', user);
+      //   store.commit('setToken', 1);
+      //   router.replace({name: 'Home'});
+      //   return;
+      // }
       try {
         if (user.account && user.password) {
-          await store.dispatch('login', user);
-          router.replace({name: 'Home'});
+          if (loginType.value) {
+
+            await store.dispatch('login', user);
+            router.replace({name: 'Home'});
+            return;
+          }
+          await handleRegister(user);
         }
       } catch (err) {
         console.log('test-err', err);
@@ -60,7 +77,9 @@ export default {
 
     return {
       user,
-      getUser,
+      handleClick,
+      loginType,
+      changeType,
     };
   },
 };

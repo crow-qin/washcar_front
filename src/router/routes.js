@@ -8,7 +8,8 @@ export default [
     component: Main,
     meta: {
       title: '会员',
-      icon: 'el-icon-user-solid',
+      // icon: 'el-icon-user-solid',
+      icon: 'User'
     },
     children: [
       {
@@ -39,7 +40,8 @@ export default [
     path: '/statistic',
     meta: {
       title: '统计记录',
-      icon: 'el-icon-s-marketing',
+      icon: 'Goods'
+      // icon: 'el-icon-s-marketing',
     },
     component: Main,
     children: [
@@ -58,7 +60,7 @@ export default [
     path: '/server-type',
     meta: {
       title: '服务类型',
-      icon: 'el-icon-s-help'
+      icon: 'Help'
     },
     component: Main,
     redirect: {
@@ -69,7 +71,7 @@ export default [
         name: RouterEnums.SERVER_TYPE_SETTING,
         path: 'setting',
         meta: {
-          title: '设置',
+          title: '表单',
         },
         component: () => import('@/views/module/server-type/setting/index.vue'),
       }
@@ -80,7 +82,7 @@ export default [
     path: '/components',
     meta: {
       title: '组件',
-      icon: 'el-icon-suitcase'
+      icon: 'Suitcase'
     },
     component: Main,
     children: [
@@ -101,5 +103,32 @@ export default [
         component: () => import('@/views/module/component-model/video/index.vue')
       }
     ]
-  }
+  },
+  {
+    name: RouterEnums.SETTING,
+    path: '/setting',
+    meta: {
+      title: '设置',
+      icon: 'Suitcase'
+    },
+    component: Main,
+    children: [
+      {
+        name: RouterEnums.SETTING_ADD_USER,
+        path: 'settingAddUser',
+        meta: {
+          title: '添加用户',
+        },
+        component: () => import('@/views/module/setting/addUser/index.vue')
+      },
+      {
+        name: RouterEnums.CHAT_CON,
+        path: 'chatCon',
+        meta: {
+          title: '聊天',
+        },
+        component: () => import('@/views/module/chat/index.vue')
+      }
+    ]
+  },
 ];

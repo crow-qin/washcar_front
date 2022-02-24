@@ -1,6 +1,6 @@
 {
   "globals": {
     "http": "readonly",
-    "CONSTANT": "readonly",
+    "CONSTANT": "readonly"
   }
 }

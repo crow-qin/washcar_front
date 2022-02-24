@@ -12,13 +12,5 @@ export default {
       state.user = obj;
     },
   },
-  actions: {
-    setUserAsync({ commit }) {
-      const user = {
-        name: '123',
-        password: '123',
-      };
-      commit('setUser',user);
-    }
-  }
+  actions: {}
 };
