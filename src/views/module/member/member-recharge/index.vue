@@ -91,7 +91,6 @@ export default {
     const searchList = reactive([]);
     const currentMember = reactive({data: null});
     watch(() => currentMember.data, (n) => {
-      console.log('test-n', n);
     });
     const selectMember = item => {
       currentMember.data = item;
@@ -105,7 +104,6 @@ export default {
     const instance = getCurrentInstance();
     const formR = ref(null);
     const handleConfirm = () => {
-      console.log('test-instance', instance);
       formR.value.validate((err)=> {
         if (!err) {
           return;

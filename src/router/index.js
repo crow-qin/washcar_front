@@ -2,8 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import CmMain from "@/views/layout/main.vue";
 import moduleRoutes from "./routes";
 import RouterEnums from "../enums/router.enums.js";
-import { getToken } from "@/utils/auth.util.js";
-import { useStore } from "vuex";
+import { getToken, getUser } from "@/utils/auth.util.js";
+import store from '@/store';
 
 const routes = [
   {
@@ -37,12 +37,14 @@ const router = createRouter({
 // 全局前置守卫
 router.beforeEach((to, from, next) => {
   // 有token
-  if (getToken()) {
+  if (!from.name && to.name != RouterEnums.LOGIN) {
+    initState();
+  }
+  if (getUser().userId) {
     // 如果token存在，不能直接前往登录页面
     if (to.path === "/login") {
       next({ path: "/" });
     }
-    initState();
     if (!to.matched.length) {
       next({ name: "Home" });
       return;
@@ -57,8 +59,14 @@ router.beforeEach((to, from, next) => {
   next();
 
 });
-const store = useStore();
 function initState() {
-  console.log("test-store", store);
+  const { user } = store.state;
+  if (!user.userId) {
+    const userLocal = getUser();
+    if (userLocal.userId) {
+      store.commit('setUser', userLocal);
+    }
+  }
+  return store.state.user;
 }
 export default router;

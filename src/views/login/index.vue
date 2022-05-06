@@ -2,16 +2,18 @@
   <div class="login-page login-page__img">
     <div class="login-page__box">
       <h1 class="login-page__box__title">会员后台管理系统</h1>
-      <el-input
-        placeholder="请输入用户名"
-        prefix-icon="el-icon-user"
-        v-model="user.account"/>
-      <el-input
-        class="login-page__box__pwd"
-        type="password"
-        placeholder="请输入密码"
-        prefix-icon="el-icon-user"
-        v-model="user.password"/>
+      <form>
+        <el-input
+          placeholder="请输入用户名"
+          prefix-icon="el-icon-user"
+          v-model="user.account"/>
+        <el-input
+          class="login-page__box__pwd"
+          type="password"
+          placeholder="请输入密码"
+          prefix-icon="el-icon-user"
+          v-model="user.password"/>
+        </form>
       <el-button type="text" @click="changeType">{{loginType ? '注册账号':'已有账号'}}</el-button>
       <el-button class="login-page__box__btn" type="primary" @click="handleClick">{{loginType ? '登录':'注册'}}</el-button>
     </div>
@@ -20,7 +22,6 @@
 
 <script>
 import { reactive, ref } from 'vue';
-// import { mapMutations } from 'vuex';
 import { useStore } from 'vuex';
 import { ElMessage } from 'element-plus';
 import { useRouter } from 'vue-router';
@@ -45,7 +46,6 @@ export default {
     };
     const handleRegister = async(data) => {
       const res = await register(data);
-      console.log('test-res', res);
     };
     
     const handleClick = async() => {
@@ -58,7 +58,6 @@ export default {
       try {
         if (user.account && user.password) {
           if (loginType.value) {
-
             await store.dispatch('login', user);
             router.replace({name: 'Home'});
             return;
@@ -66,7 +65,7 @@ export default {
           await handleRegister(user);
         }
       } catch (err) {
-        console.log('test-err', err);
+        console.log(err);
         ElMessage({
           message: err,
           type: 'error',
@@ -114,6 +113,7 @@ export default {
     }
     .login-page__box__btn {
       width: 100%;
+      margin-left: 0px;
     }
   }
 }

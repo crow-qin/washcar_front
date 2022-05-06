@@ -24,7 +24,6 @@ export default {
     const submit = async() => {
       if (user.value && password.value) {
         const res = await addUser({account: user.value, password: password.value});
-        console.log('test-res', res);
       }
     };
 

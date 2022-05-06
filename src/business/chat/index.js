@@ -1,1 +1,1 @@
-export { default as getFriendList } from './get-friend'
+export { default as getFriendsList } from './get-friends-list';

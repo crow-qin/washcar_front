@@ -5,7 +5,8 @@ import {
   Help,
   Suitcase,
   ArrowDown,
- } from '@element-plus/icons-vue';
+  CirclePlus,
+} from '@element-plus/icons-vue';
 
 export default (app) => {
   const icons = {
@@ -15,6 +16,7 @@ export default (app) => {
     Help,
     Suitcase,
     ArrowDown,
+    CirclePlus,
   };
   Object.keys(icons).map(v => {
     app.component(

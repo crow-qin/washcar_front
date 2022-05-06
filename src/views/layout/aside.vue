@@ -77,12 +77,10 @@ export default {
       }
     );
     const openPage = (item) => {
-      console.log("test-item", item);
+      // console.log("test-item", item);
       router.push({ name: item.name });
     };
-    console.log('test-router', asideList);
     return {
-
       isCollapse,
       defaultActive,
       handleOpen,

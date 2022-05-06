@@ -20,7 +20,7 @@ export default {
   },
   emits: ['update:text'],
   setup(props, { emit }) {
-    console.log('test-props', props, emit);
+    // console.log('test-props', props, emit);
     const aboutCount = inject('aboutCount');
     const addCount = inject('addCount');
 

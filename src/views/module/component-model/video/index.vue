@@ -39,7 +39,6 @@ export default {
         let mediaPro = navigator.mediaDevices.getUserMedia(constraints);
           let res = await Promise.resolve(mediaPro);
           if (res) {
-            console.log('test-res', res);
             srcObject.value = res;
             await nextTick(() => {
               vRef.value.play();
@@ -50,7 +49,6 @@ export default {
       }
     };
     const close = () => {
-      console.log('test-close', srcObject.value);
       if (srcObject.value.id) {
         srcObject.value.getTracks().forEach((track) => {
           track.stop();
@@ -63,9 +61,7 @@ export default {
     const screen = async() => {
       await play();
       nextTick(() => {
-        console.log('test-next');
         setTimeout(() => {
-          console.log('test-setTime');
           let c = canvasRef.value;
           let ctx = c.getContext('2d');
           canvasRef.value.width = c.width;

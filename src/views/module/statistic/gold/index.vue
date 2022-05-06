@@ -170,7 +170,7 @@ export default {
       timeRange: "",
     });
     const search = () => {
-      console.log('test-form', form);
+      // console.log('test-form', form);
     };
     const disabledDate = (time) => {
       return time.getTime() > Date.now();
@@ -180,7 +180,7 @@ export default {
       myEchart.getZr().on("click", function(params) {
         // 获取像素坐标点
         const pointInPixel = [params.offsetX, params.offsetY];
-        console.log("test-params", params);
+        // console.log("test-params", params);
         if (myEchart.containPixel("grid", pointInPixel)) {
           let seriesIndex = myEchart.containPixel(
             { seriesIndex: 0 },
@@ -192,7 +192,6 @@ export default {
             { seriesIndex },
             pointInPixel
           )[0];
-          console.log("test-index", seriesIndex, index);
           // index=数据index
           // todo...
         }

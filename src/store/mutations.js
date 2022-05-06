@@ -1,4 +1,4 @@
-import { setToken } from '@/utils/auth.util';
+import { setToken,setUser } from '@/utils/auth.util';
 import axios from 'axios';
 
 export default {
@@ -11,6 +11,7 @@ export default {
     });
   },
   setUser(state, user) {
+    setUser(user);
     state.user = user;
   }
 };

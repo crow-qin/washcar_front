@@ -69,7 +69,7 @@ export default {
     };
     const handleConfirm = () => {
       addMemberForm.value.validate(valid => {
-        console.log('test-valid', valid);
+        // console.log('test-valid', valid);
       });
     };
 

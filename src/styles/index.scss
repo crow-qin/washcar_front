@@ -1,4 +1,5 @@
 @import './color.scss';
+@import './theme.scss';
 
 .d-flex {
   display: flex;
@@ -6,12 +7,18 @@
 
 .page-reset {
   background-color: $color-f;
-  padding: 20px;
+  padding: $page-padding;
   flex: 1;
-  border-radius: 12px;
+  border-radius: $page-radius;
 }
+.part-reset {
+  padding: $page-padding;
+  background-color: $color-f;
+  border-radius: $page-radius;
+}
+
 .scroll-page-reset {
-  padding: 20px;
+  padding: $page-padding;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -35,11 +42,6 @@
   border-radius: 7px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: #e8e8e8;
-}
-.part-reset {
-  padding: 20px;
-  background-color: $color-f;
-  border-radius: 12px;
 }
 
 .mb-20 {
